@@ -37,6 +37,7 @@ data.sub <- mutate(data.sub, activity = activity.labels[activity])
 # From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 data.sub <- data.sub %>% 
+<<<<<<< HEAD
         gather(name, value, -subject, -activity) %>% 
         mutate(name = gsub("^t", "time.", name)) %>%
         mutate(name = gsub("^f", "frequency.", name)) %>%
@@ -49,6 +50,20 @@ data.sub <- data.sub %>%
         mutate(directions = gsub("\\.", "", directions)) %>%
         mutate(directions = ifelse(directions == "", "norm", directions)) %>%
         mutate(jerk = grepl("Jerk", jerk)) 
+=======
+    gather(name, value, -subject, -activity) %>% 
+    mutate(name = gsub("^t", "time.", name)) %>%
+    mutate(name = gsub("^f", "frequency.", name)) %>%
+    mutate(name = gsub("Acc", "Accelerometer.", name)) %>%
+    mutate(name = gsub("Gyro", "Gyroscope.", name)) %>%
+    mutate(name = gsub("BodyBody", "Body", name)) %>%
+    mutate(name = gsub("Body", "Body.", name)) %>%
+    mutate(name = gsub("Gravity", "Gravity.", name)) %>%
+    separate(name, c("magnitude", "acceleration", "device", "jerk", "estimate", "directions"), sep = "\\.", extra = "merge") %>%
+    mutate(directions = gsub("\\.", "", directions)) %>%
+    mutate(directions = ifelse(directions == "", "norm", directions)) %>%
+    mutate(jerk = grepl("Jerk", jerk)) 
+>>>>>>> 844735a2c1497d141a6e448d6b8dd7c3efce2b35
     
     
 write.table(data.sub, file = "tidy.data.txt", row.names = F)     
